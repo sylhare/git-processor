@@ -4,3 +4,4 @@
 .pytest_cache/**
 raw/*
 *.pyc
+data/*
