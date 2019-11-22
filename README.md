@@ -1,24 +1,15 @@
-# Python Seed App
+# Git Processor
 
-This is a simple skeleton for a generic Python (3.6.5) app. It comes loaded with:
-
-- tox
-- pytest
-- pylint
-
-As well a `.gitignore`, `.pylintrc` config file, and simple directory structure employing the `src` pattern.
+A git log processor for better stats.
 
 ## Setup
 
-The Dockerfile requires all the usual commands. To build the image:
+Using Docker:
 
-```
-docker build -t seed-app .
-```
-
-Then to run the image, executing the manual invoicing code.
-
-```
+```bash
+# build the image:
+docker build -t git-processor .
+# Run image:
 docker run -it seed-app
 ```
 
@@ -26,19 +17,9 @@ docker run -it seed-app
 
 To find out more info about the testing configuration, check out the `tox.ini` file.
 
-Run the test suite:
-
-```
+```bash
+# Run the test suite
 tox
-```
-
-
-Run the linter:
-
-```
+# Run the linter:
 tox -e lint
 ```
-
-## Misc Notes
-
-- Make sure and edit the package title in `setup.py` to reflect your app name
