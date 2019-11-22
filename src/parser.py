@@ -1,5 +1,7 @@
 import os
 
+import pandas as pd
+
 from src import DATA_PATH
 
 
@@ -14,6 +16,8 @@ class Projects:
         self.raw_project_list = [line.strip() for line in project_string.strip().split('\n\n')]
         self.projects = {}
         self.setup_project()
+        self.df = pd.DataFrame(columns=["name"])
+        self.setup_dataframe()
 
     def setup_project(self):
         for project in self.raw_project_list:
@@ -22,10 +26,18 @@ class Projects:
     def values_of(self, project_name):
         return list(zip(*self.projects[project_name]))
 
+    def setup_dataframe(self):
+        for key in self.projects:
+            df_key = pd.DataFrame(self.projects[key], columns=[key, "name"])
+            self.df = pd.merge(self.df, df_key, on="name", how='outer')
+        self.df.fillna(0)
 
     @staticmethod
     def split_in_list(project):
         return [line.strip().split('\t') for line in project.split('\n')][1:]
 
+
 if __name__ == "__main__":
-    print(open_data("test.txt"))
+    data = open_data("stats.txt")
+    p = Projects(data)
+    print(p.df)

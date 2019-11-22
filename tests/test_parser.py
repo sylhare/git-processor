@@ -16,3 +16,6 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(TEST_LIST_PROJECTS, self.p.raw_project_list)
         self.assertEqual(TEST_DICT_PROJECTS, self.p.projects)
         self.assertEqual(TEST_VALUES_PROJECTS, self.p.values_of("project A"))
+
+    def test_dataframe(self):
+        self.assertEqual(TEST_DF_PROJECTS, str(self.p.df))
