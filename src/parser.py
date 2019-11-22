@@ -17,8 +17,15 @@ class Projects:
 
     def setup_project(self):
         for project in self.raw_project_list:
-            self.projects[project.partition('\n')[0]] = [line.strip().split('\t') for line in project.split('\n')][1:]
+            self.projects[project.partition('\n')[0].replace("/", "")] = self.split_in_list(project)
 
+    def values_of(self, project_name):
+        return list(zip(*self.projects[project_name]))
+
+
+    @staticmethod
+    def split_in_list(project):
+        return [line.strip().split('\t') for line in project.split('\n')][1:]
 
 if __name__ == "__main__":
     print(open_data("test.txt"))
