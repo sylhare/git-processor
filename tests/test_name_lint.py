@@ -18,7 +18,7 @@ class NameTest(unittest.TestCase):
         self.assertFalse(name_linter.is_similar("owl", "dog.dog"))
 
     def test_name_with_similar_looks(self):
-        self.assertTrue(name_linter.is_similar("The Coding Owl", "owl.coding1"))
+        self.assertTrue(name_linter.is_similar("The Owl Coding", "owl.coding1"))
         self.assertFalse(name_linter.is_similar("Super Extra Dog", "Lame Under Dog"))
         self.assertTrue(name_linter.is_similar("Maté Owly Code", "mowlyco1"))
         self.assertFalse(name_linter.is_similar("Super Extra Dog", "Maté Owly Code"))
