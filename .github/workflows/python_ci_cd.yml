@@ -29,7 +29,6 @@ jobs:
       run: |
         pip install pytest
         pytest
-    - name: The same with Tox
+    - name: Test with Tox and pytest
       run: |
         tox
-        tox -e lint
