@@ -2,6 +2,8 @@
 .tox/*
 .DS_Store
 .pytest_cache/**
-raw/*
+.idea/*
+.tox/*
 *.pyc
 data/*
+raw/*

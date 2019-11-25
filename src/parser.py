@@ -1,8 +1,10 @@
 import os
 
 import pandas as pd
+import itertools
 
 from src import DATA_PATH
+from src.name_linter import trim, is_similar
 
 
 def open_data(filename="stats.txt", root=DATA_PATH):
@@ -37,7 +39,33 @@ class Projects:
         return [line.strip().split('\t') for line in project.split('\n')][1:]
 
 
+def names_and_duplicates(names):
+    results = {}
+    for a, b in itertools.combinations(names, 2):
+        if is_similar(a, b):
+            try:
+                results[b] += [b]
+            except KeyError:
+                results[b] = [b]
+
+            if a != b:
+                results[b].append(a)
+                if is_similar_in(a, results[b]):
+                    results.pop(a, None)
+    return results
+
+
+def is_similar_in(a, in_list):
+    return len(list(filter(lambda x: is_similar(a, x), in_list))) > 0
+
+
 if __name__ == "__main__":
-    data = open_data("stats.txt")
+    data = open_data("test.txt")
     p = Projects(data)
-    print(p.df)
+    p.df['name'] = p.df['name'].map(lambda x: trim(x))
+    print(p.df.groupby("name").sum())
+
+    namess = list(p.df['name'])
+    result = names_and_duplicates(namess)
+
+    print(result)
