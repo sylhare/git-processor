@@ -1,7 +1,7 @@
+import itertools
 import os
 
 import pandas as pd
-import itertools
 
 from src import DATA_PATH
 from src.name_linter import trim, is_similar
@@ -30,13 +30,21 @@ class Projects:
 
     def setup_dataframe(self):
         for key in self.projects:
-            df_key = pd.DataFrame(self.projects[key], columns=[key, "name"])
+            df_key = pd.DataFrame(self.projects[key], columns=["name", key])
             self.df = pd.merge(self.df, df_key, on="name", how='outer')
-        self.df.fillna(0)
+        self.df = self.df.fillna(0)
+
+    @staticmethod
+    def clean_values(line):
+        try:
+            value = line.strip().split('\t')
+            return [value[1], int(value[0])]
+        except IndexError:
+            return line
 
     @staticmethod
     def split_in_list(project):
-        return [line.strip().split('\t') for line in project.split('\n')][1:]
+        return [Projects.clean_values(line) for line in project.split('\n')][1:]
 
 
 def names_and_duplicates(names):
