@@ -73,10 +73,16 @@ def is_similar_in(a, in_list):
 if __name__ == "__main__":
     data = open_data("test.txt")
     p = Projects(data)
+    print(p.df)
     p.df['name'] = p.df['name'].map(lambda x: trim(x))
-    print(p.df.groupby("name").sum())
+    p.df = p.df.groupby("name").sum().reset_index(level=0)
+    print(p.df)
+    alias = names_and_duplicates(p.df['name'])
 
-    namess = list(p.df['name'])
-    result = names_and_duplicates(namess)
+    for index, row in p.df.iterrows():
+        for key in alias.keys():
+            if row['name'] in alias[key]:
+                p.df.at[index, 'name'] = key
 
-    print(result)
+    p.df = p.df.groupby("name").sum().reset_index(level=0)
+    print(p.df)

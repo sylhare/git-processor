@@ -12,3 +12,10 @@ project B/
     10	owl
      5	owl2
      2	coder
+
+project C/
+    98	badog
+    53	éspy
+    21	locom1
+     5	locmo
+     1	the.coder2
