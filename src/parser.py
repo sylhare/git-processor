@@ -50,16 +50,19 @@ class Projects:
 def names_and_duplicates(names):
     results = {}
     for a, b in itertools.combinations(names, 2):
-        if is_similar(a, b):
-            try:
-                results[b] += [b]
-            except KeyError:
-                results[b] = [b]
+        try:
+            results[b] += [b]
+        except KeyError:
+            results[b] = [b]
 
+        if is_similar(a, b):
             if a != b:
                 results[b].append(a)
                 if is_similar_in(a, results[b]):
                     results.pop(a, None)
+        else:
+            results[b].remove(b)
+
     return results
 
 

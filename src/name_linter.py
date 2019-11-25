@@ -8,7 +8,7 @@ def similarity_ratio(a, b):
 
 
 def is_similar(word, other):
-    return similarity_ratio(trim(word), trim(other)) > 0.6
+    return similarity_ratio(trim(word), trim(other)) > 0.59
 
 
 def remove_digit(word):
@@ -28,4 +28,4 @@ def remove_accent(text):
 
 
 if __name__ == "__main__":
-    pass
+    print(is_similar("word", "ord"))
