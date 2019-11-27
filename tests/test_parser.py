@@ -10,7 +10,10 @@ class ParserTest(unittest.TestCase):
         self.p = Projects(TEST_STRING_PROJECTS)
 
     def test_opendata(self):
-        self.assertEqual(TEST_STRING_PROJECTS, open_data(root=TEST_PATH, filename="stats.txt"))
+        self.assertEqual(TEST_STRING_PROJECTS, open_data(os.path.join(TEST_PATH, "stats.txt")))
+
+    def test_project_with_path_or_string(self):
+        self.assertEqual(str(Projects(os.path.join(TEST_PATH, "stats.txt")).df), str(self.p.df))
 
     def test_parsed_project(self):
         self.assertEqual(TEST_LIST_PROJECTS, self.p.raw_project_list)
@@ -21,12 +24,12 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(TEST_DF_PROJECTS, str(self.p.df))
 
     def test_cleansed_dataframe(self):
-        p = Projects(open_data(root=TEST_PATH, filename="other.txt"))
+        p = Projects(open_data(os.path.join(TEST_PATH, "other.txt")))
         self.assertNotEqual(TEST_COMPLEX_CDF_PROJECTS, str(p.df))
         p.clean_up_names()
         self.assertEqual(TEST_COMPLEX_CDF_PROJECTS, str(p.df))
 
     def test_get_total(self):
-        p = Projects(open_data(root=TEST_PATH, filename="other.txt"))
+        p = Projects(open_data(os.path.join(TEST_PATH, "other.txt")))
         p.clean_up_names()
         self.assertEqual(TEST_TOTAL_PROJECTS, str(p.total()))

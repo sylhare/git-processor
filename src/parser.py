@@ -2,28 +2,23 @@ import os
 
 import pandas as pd
 
-from src import DATA_PATH
 from src.name_linter import *
 
 
-def open_data(filename="stats.txt", root=DATA_PATH):
-    with open(os.path.join(root, filename)) as f:
+def open_data(filename):
+    with open(filename) as f:
         return f.read()
 
 
 class Projects:
 
     def __init__(self, project_string):
-        self.raw_project_list = [line.strip() for line in project_string.strip().split('\n\n')]
+        self.raw_project_list = self.__extract_raw(project_string)
         self.projects = {}
-        self.setup_project()
+        self.__setup_project()
         self.__aliases = {}
         self.df = pd.DataFrame(columns=["name"])
         self.setup_dataframe()
-
-    def setup_project(self):
-        for project in self.raw_project_list:
-            self.projects[project.partition('\n')[0].replace("/", "")] = self.split_in_list(project)
 
     def values_of(self, project_name):
         return list(zip(*self.projects[project_name]))
@@ -45,7 +40,7 @@ class Projects:
 
     def total(self):
         total = self.df.set_index('name')
-        return total.sum(axis=1, skipna=True)
+        return total.sum(axis=1, skipna=True).reset_index(name='total')
 
     @staticmethod
     def format_values(line):
@@ -59,6 +54,16 @@ class Projects:
     def split_in_list(project):
         return [Projects.format_values(line) for line in project.split('\n')][1:]
 
+    def __extract_raw(self, project_string):
+        if os.path.exists(os.path.dirname(project_string)):
+            project_string = open_data(project_string)
+
+        return [line.strip() for line in project_string.strip().split('\n\n')]
+
+    def __setup_project(self):
+        for project in self.raw_project_list:
+            self.projects[project.partition('\n')[0].replace("/", "")] = self.split_in_list(project)
+
     def __create_aliases(self):
         self.df['name'] = self.df['name'].map(lambda x: trim(x))
         self.df = self.__group_by_name()
@@ -66,12 +71,3 @@ class Projects:
 
     def __group_by_name(self):
         return self.df.groupby("name").sum().reset_index(level=0)
-
-
-if __name__ == "__main__":
-    data = open_data("test.txt")
-    p = Projects(data)
-    print(p.df)
-    p.clean_up_names()
-    print(p.df)
-    print(p.total())
