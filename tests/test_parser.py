@@ -25,3 +25,8 @@ class ParserTest(unittest.TestCase):
         self.assertNotEqual(TEST_COMPLEX_CDF_PROJECTS, str(p.df))
         p.clean_up_names()
         self.assertEqual(TEST_COMPLEX_CDF_PROJECTS, str(p.df))
+
+    def test_get_total(self):
+        p = Projects(open_data(root=TEST_PATH, filename="other.txt"))
+        p.clean_up_names()
+        self.assertEqual(TEST_TOTAL_PROJECTS, str(p.total()))

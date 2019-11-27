@@ -43,6 +43,10 @@ class Projects:
                     self.df.at[index, 'name'] = key
         self.df = self.__group_by_name()
 
+    def total(self):
+        total = self.df.set_index('name')
+        return total.sum(axis=1, skipna=True)
+
     @staticmethod
     def format_values(line):
         try:
@@ -70,3 +74,4 @@ if __name__ == "__main__":
     print(p.df)
     p.clean_up_names()
     print(p.df)
+    print(p.total())

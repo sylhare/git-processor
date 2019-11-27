@@ -43,3 +43,12 @@ TEST_COMPLEX_CDF_PROJECTS = """       name  project A  project B  project C
 4       owl       29.0       15.0        0.0
 5       spy        1.0        0.0       53.0
 6  thecoder        3.0        2.0        1.0"""
+TEST_TOTAL_PROJECTS = """name
+dog         210.0
+hero        122.0
+locom        32.0
+monkey        6.0
+owl          44.0
+spy          54.0
+thecoder      6.0
+dtype: float64"""
