@@ -8,3 +8,5 @@
 data/*
 raw/*
 jupyter/.ipynb_checkpoints/*
+*.egg-info
+build/*

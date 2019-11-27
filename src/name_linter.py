@@ -49,7 +49,3 @@ def alias_dictionary_of(names):
             results[b].remove(b)
 
     return results
-
-
-if __name__ == "__main__":
-    print(is_similar("word", "ord"))

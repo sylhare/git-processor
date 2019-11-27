@@ -5,11 +5,6 @@ import pandas as pd
 from src.name_linter import *
 
 
-def open_data(filename):
-    with open(filename) as f:
-        return f.read()
-
-
 class Projects:
 
     def __init__(self, project_string):
@@ -31,7 +26,6 @@ class Projects:
 
     def clean_up_names(self):
         self.__create_aliases()
-        print(self.__aliases)
         for index, row in self.df.iterrows():
             for key in self.__aliases.keys():
                 if row['name'] in self.__aliases[key]:
@@ -54,9 +48,14 @@ class Projects:
     def split_in_list(project):
         return [Projects.format_values(line) for line in project.split('\n')][1:]
 
+    @staticmethod
+    def read(filename):
+        with open(filename) as f:
+            return f.read()
+
     def __extract_raw(self, project_string):
         if os.path.exists(os.path.dirname(project_string)):
-            project_string = open_data(project_string)
+            project_string = Projects.read(project_string)
 
         return [line.strip() for line in project_string.strip().split('\n\n')]
 
