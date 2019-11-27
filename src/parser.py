@@ -1,10 +1,9 @@
-import itertools
 import os
 
 import pandas as pd
 
 from src import DATA_PATH
-from src.name_linter import trim, is_similar
+from src.name_linter import *
 
 
 def open_data(filename="stats.txt", root=DATA_PATH):
@@ -18,8 +17,10 @@ class Projects:
         self.raw_project_list = [line.strip() for line in project_string.strip().split('\n\n')]
         self.projects = {}
         self.setup_project()
+        self.__aliases = {}
         self.df = pd.DataFrame(columns=["name"])
         self.setup_dataframe()
+        self.__create_aliases()
 
     def setup_project(self):
         for project in self.raw_project_list:
@@ -34,8 +35,16 @@ class Projects:
             self.df = pd.merge(self.df, df_key, on="name", how='outer')
         self.df = self.df.fillna(0)
 
+    def clean_up_names(self):
+        for index, row in self.df.iterrows():
+            for key in self.__aliases.keys():
+                if row['name'] in self.__aliases[key]:
+                    self.df.at[index, 'name'] = key
+
+        self.df = self.__group_by_name()
+
     @staticmethod
-    def clean_values(line):
+    def format_values(line):
         try:
             value = line.strip().split('\t')
             return [value[1], int(value[0])]
@@ -44,45 +53,19 @@ class Projects:
 
     @staticmethod
     def split_in_list(project):
-        return [Projects.clean_values(line) for line in project.split('\n')][1:]
+        return [Projects.format_values(line) for line in project.split('\n')][1:]
 
+    def __create_aliases(self):
+        self.df['name'] = self.df['name'].map(lambda x: trim(x))
+        self.df = self.__group_by_name()
 
-def names_and_duplicates(names):
-    results = {}
-    for a, b in itertools.combinations(names, 2):
-        try:
-            results[b] += [b]
-        except KeyError:
-            results[b] = [b]
-
-        if is_similar(a, b):
-            if a != b:
-                results[b].append(a)
-                if is_similar_in(a, results[b]):
-                    results.pop(a, None)
-        else:
-            results[b].remove(b)
-
-    return results
-
-
-def is_similar_in(a, in_list):
-    return len(list(filter(lambda x: is_similar(a, x), in_list))) > 0
+    def __group_by_name(self):
+        return self.df.groupby("name").sum().reset_index(level=0)
 
 
 if __name__ == "__main__":
     data = open_data("test.txt")
     p = Projects(data)
     print(p.df)
-    p.df['name'] = p.df['name'].map(lambda x: trim(x))
-    p.df = p.df.groupby("name").sum().reset_index(level=0)
-    print(p.df)
-    alias = names_and_duplicates(p.df['name'])
-
-    for index, row in p.df.iterrows():
-        for key in alias.keys():
-            if row['name'] in alias[key]:
-                p.df.at[index, 'name'] = key
-
-    p.df = p.df.groupby("name").sum().reset_index(level=0)
+    p.clean_up_names()
     print(p.df)
