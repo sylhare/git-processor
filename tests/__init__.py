@@ -35,3 +35,11 @@ TEST_DF_PROJECTS = """     name  project A  project B
 5   coder        3.0        2.0
 6     spy        1.0        0.0
 7    owl2        0.0        5.0"""
+TEST_COMPLEX_CDF_PROJECTS = """       name  project A  project B  project C
+0       dog      100.0       12.0       98.0
+1      hero      122.0        0.0        0.0
+2     locom        6.0        0.0       26.0
+3    monkey        6.0        0.0        0.0
+4       owl       29.0       15.0        0.0
+5       spy        1.0        0.0       53.0
+6  thecoder        3.0        2.0        1.0"""

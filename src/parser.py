@@ -20,7 +20,6 @@ class Projects:
         self.__aliases = {}
         self.df = pd.DataFrame(columns=["name"])
         self.setup_dataframe()
-        self.__create_aliases()
 
     def setup_project(self):
         for project in self.raw_project_list:
@@ -36,11 +35,12 @@ class Projects:
         self.df = self.df.fillna(0)
 
     def clean_up_names(self):
+        self.__create_aliases()
+        print(self.__aliases)
         for index, row in self.df.iterrows():
             for key in self.__aliases.keys():
                 if row['name'] in self.__aliases[key]:
                     self.df.at[index, 'name'] = key
-
         self.df = self.__group_by_name()
 
     @staticmethod
@@ -58,6 +58,7 @@ class Projects:
     def __create_aliases(self):
         self.df['name'] = self.df['name'].map(lambda x: trim(x))
         self.df = self.__group_by_name()
+        self.__aliases = alias_dictionary_of(self.df['name'])
 
     def __group_by_name(self):
         return self.df.groupby("name").sum().reset_index(level=0)

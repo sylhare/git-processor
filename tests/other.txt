@@ -1,0 +1,21 @@
+project A/
+   122	hero
+   100	dog
+    29	owl
+     6	loco
+     6	monkey
+     3	coder
+     1	spy
+
+project B/
+    12	dog
+    10	owl
+     5	owl2
+     2	coder
+
+project C/
+    98	badog
+    53	éspy
+    21	locom1
+     5	locmo
+     1	the.coder2

@@ -19,3 +19,9 @@ class ParserTest(unittest.TestCase):
 
     def test_dataframe(self):
         self.assertEqual(TEST_DF_PROJECTS, str(self.p.df))
+
+    def test_cleansed_dataframe(self):
+        p = Projects(open_data(root=TEST_PATH, filename="other.txt"))
+        self.assertNotEqual(TEST_COMPLEX_CDF_PROJECTS, str(p.df))
+        p.clean_up_names()
+        self.assertEqual(TEST_COMPLEX_CDF_PROJECTS, str(p.df))
