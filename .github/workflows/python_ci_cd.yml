@@ -28,7 +28,8 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest
+        pip install pytest-cov
+        pytest --cov=git_processor tests/
     - name: Test with Tox and pytest
       run: |
         tox
