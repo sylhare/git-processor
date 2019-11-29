@@ -14,3 +14,4 @@ dist/*
 env/*
 jupyter/2019-09.txt
 jupyter/2019-11.txt
+.coverage

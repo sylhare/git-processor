@@ -13,8 +13,6 @@ Install the library with:
 
     # From pypi
     python3 -m pip install git_processor
-    # From local
-    python3 -m pip install .
 
 
 To use it, run the ``generate_git_logs.sh`` in where you have all your repository.
@@ -56,3 +54,26 @@ To find out more info about the testing configuration, check out the
    tox
    # Run the linter:
    tox -e lint
+
+
+Local Installation
+------------------
+
+Using a virtual environment:
+
+.. code:: bash
+
+    # From pypi
+    python3 -m pip install virtualenv
+
+Then set it up and install the package locally
+
+.. code:: bash
+
+   # Create the virtual environment
+   python3 -m venv `pwd`/env
+   # Activate it
+   source env/bin/activate
+   # Install from local
+   (env) python3 -m pip install .
+
