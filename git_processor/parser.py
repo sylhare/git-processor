@@ -2,7 +2,7 @@ import os
 
 import pandas as pd
 
-from src.name_linter import *
+from processor.name_linter import *
 
 
 class Projects:
