@@ -10,3 +10,7 @@ raw/*
 jupyter/.ipynb_checkpoints/*
 *.egg-info
 build/*
+dist/*
+env/*
+jupyter/2019-09.txt
+jupyter/2019-11.txt

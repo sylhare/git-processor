@@ -1,6 +1,6 @@
 import unittest
 
-from src import name_linter
+from git_processor import name_linter
 
 
 class NameTest(unittest.TestCase):

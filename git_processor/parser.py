@@ -2,7 +2,7 @@ import os
 
 import pandas as pd
 
-from processor.name_linter import *
+from git_processor.name_linter import *
 
 
 class Projects:

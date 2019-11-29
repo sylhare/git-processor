@@ -1,6 +1,6 @@
 import os
 
-from src import ROOT_PATH
+from git_processor import ROOT_PATH
 
 TEST_PATH = os.path.join(ROOT_PATH, "tests")
 

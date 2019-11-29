@@ -1,27 +1,21 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
-with open('README.md') as file:
+with open('README.rst') as file:
     long_description = file.read()
 
-with open('requirements.txt') as file:
-    requirements = file.read().split("\n")
-
-with open('dev-requirements.txt') as file:
-    dev_requirements = file.read().split("\n")
-
 setup(
-    name='Git Processor',
-    version='0.1',
+    name='git_processor',
+    version='0.3',
     description='Process and parse through git log statistic',
-    long_description = long_description,
-    keywords='git processor data science',
-    url='https://github.com/sylhare/git-processor',
+    long_description=str(long_description),
+    keywords='git git_processor data science',
+    url='https://github.com/sylhare/git-git_processor',
     author='sylhare',
+    author_email='sylhare@outlook.com',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 3.6',
     ],
-    packages=find_packages(),
+    packages=['git_processor'],
     install_requires=['pandas', 'matplotlib'],
-    tests_require=['tox', 'pytest', 'pylint'],
 )
