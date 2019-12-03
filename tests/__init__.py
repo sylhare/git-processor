@@ -18,14 +18,18 @@ project B/
     10	owl
      5	owl2
      2	coder"""
+
 TEST_LIST_PROJECTS = [
     'project A/\n   122\thero\n   100\tdog\n    29\towl\n     6\tloco\n     6\tmonkey\n     3\tcoder\n     1\tspy',
     'project B/\n    12\tdog\n    10\towl\n     5\towl2\n     2\tcoder']
+
 TEST_DICT_PROJECTS = {'project A': [['hero', 122], ['dog', 100], ['owl', 29], ['loco', 6], ['monkey', 6], ['coder', 3],
                                     ['spy', 1]],
                       'project B': [['dog', 12], ['owl', 10], ['owl2', 5], ['coder', 2]]}
+
 TEST_VALUES_PROJECTS = [('hero', 'dog', 'owl', 'loco', 'monkey', 'coder', 'spy'),
                         (122, 100, 29, 6, 6, 3, 1)]
+
 TEST_DF_PROJECTS = """     name  project A  project B
 0    hero      122.0        0.0
 1     dog      100.0       12.0
@@ -35,6 +39,7 @@ TEST_DF_PROJECTS = """     name  project A  project B
 5   coder        3.0        2.0
 6     spy        1.0        0.0
 7    owl2        0.0        5.0"""
+
 TEST_COMPLEX_CDF_PROJECTS = """       name  project A  project B  project C
 0       dog      100.0       12.0       98.0
 1      hero      122.0        0.0        0.0
@@ -43,6 +48,7 @@ TEST_COMPLEX_CDF_PROJECTS = """       name  project A  project B  project C
 4       owl       29.0       15.0        0.0
 5       spy        1.0        0.0       53.0
 6  thecoder        3.0        2.0        1.0"""
+
 TEST_TOTAL_PROJECTS = """       name  total
 0       dog  210.0
 1      hero  122.0
@@ -51,7 +57,8 @@ TEST_TOTAL_PROJECTS = """       name  total
 4       owl   44.0
 5       spy   54.0
 6  thecoder    6.0"""
-TEST_PERCENTAGE_PROJECT = """          total  total %
+
+TEST_PERCENTAGE_PROJECTS = """          total  total %
 name                    
 dog       210.0    44.30
 hero      122.0    25.74
@@ -60,3 +67,13 @@ monkey      6.0     1.27
 owl        44.0     9.28
 spy        54.0    11.39
 thecoder    6.0     1.27"""
+
+TEST_PERCENTAGE_PROJECT = """          project B  total %
+name                        
+dog            12.0    41.38
+hero            0.0     0.00
+locom           0.0     0.00
+monkey          0.0     0.00
+owl            15.0    51.72
+spy             0.0     0.00
+thecoder        2.0     6.90"""

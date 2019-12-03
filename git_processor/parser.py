@@ -37,13 +37,19 @@ class Projects:
         return total.sum(axis=1, skipna=True).reset_index(name='total')
 
     def total_percentage(self):
-        percentage = self.total()
-        total_commits = percentage['total'].sum()
-        percentage['total %'] = percentage['total'].apply(lambda x: round(100 * float(x) / float(total_commits), 2))
-        return percentage.set_index('name')
+        return self.__percentage_column('total', self.total())
+
+    def total_project(self, project):
+        return self.__percentage_column(project, self.df.copy()[['name', project]])
 
     @staticmethod
-    def format_values(line):
+    def __percentage_column(column, total):
+        total_commits = total[column].sum()
+        total['total %'] = total[column].apply(lambda x: round(100 * float(x) / float(total_commits), 2))
+        return total.set_index('name')
+
+    @staticmethod
+    def __format_values(line):
         try:
             value = line.strip().split('\t')
             return [value[1], int(value[0])]
@@ -51,8 +57,8 @@ class Projects:
             return line
 
     @staticmethod
-    def split_in_list(project):
-        return [Projects.format_values(line) for line in project.split('\n')][1:]
+    def __split_in_list(project):
+        return [Projects.__format_values(line) for line in project.split('\n')][1:]
 
     @staticmethod
     def read(filename):
@@ -68,7 +74,7 @@ class Projects:
 
     def __setup_project(self):
         for project in self.raw_project_list:
-            self.projects[project.partition('\n')[0].replace("/", "")] = self.split_in_list(project)
+            self.projects[project.partition('\n')[0].replace("/", "")] = self.__split_in_list(project)
 
     def __create_aliases(self):
         self.df['name'] = self.df['name'].map(lambda x: trim(x))

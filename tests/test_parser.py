@@ -37,7 +37,12 @@ class ParserTest(unittest.TestCase):
     def test_get_average(self):
         p = Projects(os.path.join(TEST_PATH, "other.txt"))
         p.clean_up_names()
-        self.assertEqual(TEST_PERCENTAGE_PROJECT, str(p.total_percentage()))
+        self.assertEqual(TEST_PERCENTAGE_PROJECTS, str(p.total_percentage()))
+
+    def test_get_average_project(self):
+        p = Projects(os.path.join(TEST_PATH, "other.txt"))
+        p.clean_up_names()
+        self.assertEqual(TEST_PERCENTAGE_PROJECT, str(p.total_project("project B")))
 
 
 if __name__ == "__main__":
