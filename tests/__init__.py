@@ -51,11 +51,12 @@ TEST_TOTAL_PROJECTS = """       name  total
 4       owl   44.0
 5       spy   54.0
 6  thecoder    6.0"""
-TEST_PERCENTAGE_PROJECT = """       name  total  total %
-0       dog  210.0    44.30
-1      hero  122.0    25.74
-2     locom   32.0     6.75
-3    monkey    6.0     1.27
-4       owl   44.0     9.28
-5       spy   54.0    11.39
-6  thecoder    6.0     1.27"""
+TEST_PERCENTAGE_PROJECT = """          total  total %
+name                    
+dog       210.0    44.30
+hero      122.0    25.74
+locom      32.0     6.75
+monkey      6.0     1.27
+owl        44.0     9.28
+spy        54.0    11.39
+thecoder    6.0     1.27"""

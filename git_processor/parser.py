@@ -40,7 +40,7 @@ class Projects:
         percentage = self.total()
         total_commits = percentage['total'].sum()
         percentage['total %'] = percentage['total'].apply(lambda x: round(100 * float(x) / float(total_commits), 2))
-        return percentage
+        return percentage.set_index('name')
 
     @staticmethod
     def format_values(line):
