@@ -36,6 +36,12 @@ class Projects:
         total = self.df.set_index('name')
         return total.sum(axis=1, skipna=True).reset_index(name='total')
 
+    def total_percentage(self):
+        percentage = self.total()
+        total_commits = percentage['total'].sum()
+        percentage['total %'] = percentage['total'].apply(lambda x: round(100 * float(x) / float(total_commits), 2))
+        return percentage
+
     @staticmethod
     def format_values(line):
         try:
@@ -53,7 +59,8 @@ class Projects:
         with open(filename) as f:
             return f.read()
 
-    def __extract_raw(self, project_string):
+    @staticmethod
+    def __extract_raw(project_string):
         if os.path.exists(os.path.dirname(project_string)):
             project_string = Projects.read(project_string)
 
