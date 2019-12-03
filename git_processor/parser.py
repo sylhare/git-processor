@@ -42,6 +42,12 @@ class Projects:
     def total_project(self, project):
         return self.__percentage_column(project, self.df.copy()[['name', project]])
 
+    def average(self):
+        average = self.total()
+        project_number = len(self.df.set_index('name').columns)
+        average['average'] = average['total'].apply(lambda x: int(float(x) / float(project_number)))
+        return average.set_index('name')
+
     @staticmethod
     def __percentage_column(column, total):
         total_commits = total[column].sum()

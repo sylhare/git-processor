@@ -77,3 +77,13 @@ monkey          0.0     0.00
 owl            15.0    51.72
 spy             0.0     0.00
 thecoder        2.0     6.90"""
+
+TEST_AVERAGE_PROJECT = """          total  average
+name                    
+dog       210.0       70
+hero      122.0       40
+locom      32.0       10
+monkey      6.0        2
+owl        44.0       14
+spy        54.0       18
+thecoder    6.0        2"""
