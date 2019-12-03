@@ -20,7 +20,7 @@ class DataframeTest(unittest.TestCase):
         self.assertEqual(TEST_PERCENTAGE_PROJECT, str(self.p.total_project("project B")))
 
     def test_get_average(self):
-        self.assertEqual(TEST_AVERAGE_PROJECT, str(self.p.average()))
+        self.assertEqual(TEST_AVERAGE_PROJECT, str(self.p.average_user()))
 
 
 if __name__ == "__main__":

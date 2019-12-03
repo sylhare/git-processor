@@ -14,6 +14,7 @@ class Projects:
         self.__aliases = {}
         self.df = pd.DataFrame(columns=["name"])
         self.setup_dataframe()
+        self.project_number = len(self.df.set_index('name').columns)
 
     def values_of(self, project_name):
         return list(zip(*self.projects[project_name]))
@@ -42,14 +43,23 @@ class Projects:
     def total_project(self, project):
         return self.__percentage_column(project, self.df.copy()[['name', project]])
 
-    def average(self):
+    def average_user(self):
         average = self.total()
-        project_number = len(self.df.set_index('name').columns)
-        average['average'] = average['total'].apply(lambda x: int(float(x) / float(project_number)))
+        average['average'] = average['total'].apply(lambda x: int(float(x) / float(self.project_number)))
         return average.set_index('name')
 
+    def cross_stats(self):
+        average = self.df.copy().set_index('name')
+        average['average'] = self.average_user()['average']
+        average['total'] = self.total().set_index('name')['total']
+        average = average.transpose()
+        average['total'] = average.sum(axis=1, skipna=True)
+        average['average'] = average['total'].apply(lambda x: int(float(x) / float(len(average.columns))))
+        average['total %'] = average['total'].apply(lambda x: round(100 * float(x) / float(average['total']['total']), 2))
+        return average
+
     @staticmethod
-    def __percentage_column(column, total):
+    def __percentage_column(total, column='total'):
         total_commits = total[column].sum()
         total['total %'] = total[column].apply(lambda x: round(100 * float(x) / float(total_commits), 2))
         return total.set_index('name')

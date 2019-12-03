@@ -29,21 +29,7 @@ class ParserTest(unittest.TestCase):
         p.clean_up_names()
         self.assertEqual(TEST_COMPLEX_CDF_PROJECTS, str(p.df))
 
-    def test_get_total(self):
+    def test_number_columns(self):
+        self.assertEqual(2, self.p.project_number)
         p = Projects(os.path.join(TEST_PATH, "other.txt"))
-        p.clean_up_names()
-        self.assertEqual(TEST_TOTAL_PROJECTS, str(p.total()))
-
-    def test_get_average(self):
-        p = Projects(os.path.join(TEST_PATH, "other.txt"))
-        p.clean_up_names()
-        self.assertEqual(TEST_PERCENTAGE_PROJECTS, str(p.total_percentage()))
-
-    def test_get_average_project(self):
-        p = Projects(os.path.join(TEST_PATH, "other.txt"))
-        p.clean_up_names()
-        self.assertEqual(TEST_PERCENTAGE_PROJECT, str(p.total_project("project B")))
-
-
-if __name__ == "__main__":
-    unittest.main()
+        self.assertEqual(3, p.project_number)
