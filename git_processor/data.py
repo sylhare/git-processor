@@ -29,28 +29,38 @@ class Projects:
 
     def total(self):
         total = self.df.set_index('name')
-        return total.sum(axis=1, skipna=True).reset_index(name='total')
+        return total.sum(axis=1).reset_index(name='total')
 
-    def total_percentage(self):
+    def user_percentage(self):
         return percentage_total(self.total())
 
-    def total_project(self, project):
+    def user_percentage_project(self, project):
         return percentage_total(self.df.copy()[['name', project]], project)
 
-    def average_user(self):
+    def user_average(self):
         average_user = self.total()
         average_user['average'] = average_user['total'].apply(average(self.project_number))
         return average_user.set_index('name')
 
-    def cross_stats(self):
-        project_stats = self.df.copy().set_index('name')
-        project_stats['total'] = self.total().set_index('name')['total']
-        project_stats['average'] = self.average_user()['average']
-        project_stats = project_stats.transpose()
-        project_stats['total'] = project_stats.sum(axis=1, skipna=True)
-        project_stats['average'] = project_stats['total'].apply(average(len(project_stats.columns)))
-        project_stats['total %'] = project_stats['total'].apply(percentage(project_stats['total']['total']))
-        return project_stats
+    def projects_total(self):
+        projects = self.df.set_index('name')
+        projects['total'] = self.total().set_index('name')['total']
+        projects = projects.transpose()
+        projects['total'] = projects.sum(axis=1)
+        return projects
+
+    def projects_percentage(self):
+        projects = self.projects_total()
+        projects['total %'] = projects['total'].apply(percentage(projects['total']['total']))
+        return projects
+
+    def projects_average(self):
+        projects = self.projects_total()
+        projects['average'] = projects['total'].apply(average(len(projects.columns)))
+        return projects
+
+    def contributors(self):
+        return self.df.set_index('name').transpose().astype(bool).sum(axis=1).to_frame(name="contributors")
 
     def __setup_project(self):
         for project in self.raw_project_list:
@@ -77,4 +87,4 @@ if __name__ == "__main__":
     p = Projects(os.path.abspath("other.txt"))
     p.clean_up_names()
 
-    print(p.cross_stats())
+    print(p.user_percentage_project("project C"))
