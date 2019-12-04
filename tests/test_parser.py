@@ -1,6 +1,7 @@
 import unittest
 
-from git_processor.parser import Projects
+from git_processor.data import Projects
+from git_processor.parser import read
 from tests import *
 
 
@@ -10,7 +11,7 @@ class ParserTest(unittest.TestCase):
         self.p = Projects(TEST_STRING_PROJECTS)
 
     def test_opendata(self):
-        self.assertEqual(TEST_STRING_PROJECTS, Projects.read(os.path.join(TEST_PATH, "stats.txt")))
+        self.assertEqual(TEST_STRING_PROJECTS, read(os.path.join(TEST_PATH, "stats.txt")))
 
     def test_project_with_path_or_string(self):
         self.assertEqual(str(Projects(os.path.join(TEST_PATH, "stats.txt")).df), str(self.p.df))

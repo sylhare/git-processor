@@ -20,7 +20,8 @@ It will create a ``stats.txt`` file.
 
 .. code:: python
 
-    from git_processor.parser import Projects
+    import os
+    from git_processor.data import Projects
 
     p = Projects(os.path.abspath("stats.txt"))  # Process the git log stats
     p.clean_up_names()                          # Get all similar names as one

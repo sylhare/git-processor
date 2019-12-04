@@ -1,6 +1,6 @@
 import unittest
 
-from git_processor.parser import Projects
+from git_processor.data import Projects
 from tests import *
 
 
