@@ -5,7 +5,7 @@ with open('README.rst') as file:
 
 setup(
     name='git_processor',
-    version='0.4',
+    version='0.5',
     description='Process and parse through git log statistic',
     long_description=str(long_description),
     keywords='git git_processor data science',
