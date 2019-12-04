@@ -23,3 +23,9 @@ def extract_raw(project_string):
 def read(filename):
     with open(filename) as f:
         return f.read()
+
+
+def filter_user(df, users):
+    filtered_df = df.loc[df['name'].isin(users)]
+    filtered_df = filtered_df.set_index('name')
+    return filtered_df

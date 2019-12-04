@@ -1,7 +1,7 @@
 import unittest
 
 from git_processor.data import Projects
-from git_processor.parser import read
+from git_processor.parser import read, filter_user
 from tests import *
 
 
@@ -34,3 +34,6 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(2, self.p.project_number)
         p = Projects(os.path.join(TEST_PATH, "other.txt"))
         self.assertEqual(3, p.project_number)
+
+    def test_filtered(self):
+        self.assertEqual(TEST_FILTERED_DF, str(filter_user(self.p.df, ['dog', 'monkey', 'owl'])))
