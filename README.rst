@@ -3,6 +3,8 @@ Git Processor
 
 A git log processor for better stats.
 
+View the demo `git processor demo <https://sylhare.github.io/git-processor/>`_.
+
 
 Setup
 -----
