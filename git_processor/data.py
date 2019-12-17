@@ -60,7 +60,10 @@ class Projects:
         return projects
 
     def contributors(self):
-        return self.df.set_index('name').transpose().astype(bool).sum(axis=1).to_frame(name="contributors")
+        return self.df.set_index('name').astype(bool).sum(axis=0).to_frame(name="contributors")
+
+    def projects_contributing(self):
+        return self.df.set_index('name').astype(bool).sum(axis=1).to_frame(name="contributing")
 
     def __setup_project(self):
         for project in self.raw_project_list:
@@ -79,12 +82,3 @@ class Projects:
 
     def __group_by_name(self):
         return self.df.groupby("name").sum().reset_index(level=0)
-
-
-if __name__ == "__main__":
-    import os
-
-    p = Projects(os.path.abspath("other.txt"))
-    p.clean_up_names()
-
-    print(p.user_percentage_project("project C"))

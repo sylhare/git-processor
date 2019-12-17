@@ -25,6 +25,9 @@ class DataframeTest(unittest.TestCase):
     def test_get_contributor(self):
         self.assertEqual(TEST_CONTRIBUTORS, str(self.p.contributors()))
 
+    def test_get_contributing(self):
+        self.assertEqual(TEST_CONTRIBUTING, str(self.p.projects_contributing()))
+
     def test_get_project_percentage(self):
         self.assertEqual(TEST_PERCENTAGE_PROJECT, str(self.p.projects_percentage()))
 

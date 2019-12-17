@@ -93,6 +93,16 @@ project A             7
 project B             3
 project C             4"""
 
+TEST_CONTRIBUTING = """          contributing
+name                  
+dog                  3
+hero                 1
+locom                2
+monkey               1
+owl                  2
+spy                  2
+thecoder             3"""
+
 TEST_PERCENTAGE_PROJECT = """name         dog   hero  locom  monkey   owl   spy  thecoder  total  total %
 project A  100.0  122.0    6.0     6.0  29.0   1.0       3.0  267.0    56.33
 project B   12.0    0.0    0.0     0.0  15.0   0.0       2.0   29.0     6.12
