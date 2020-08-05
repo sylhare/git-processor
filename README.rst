@@ -2,6 +2,7 @@ Git Processor
 =============
 
 A git log processor for better stats.
+Made to be used on one or multiple Git repositories
 
 View the demo `git processor demo <https://sylhare.github.io/git-processor/>`_.
 
@@ -42,7 +43,7 @@ Let's use jupyter to display the information.
 
 Once you are in the jupyter notebook, you can display the data and plot the stats.
 Check in the ``jupyter/`` folder, you can reuse the demo and get your stats in one go.
-Just click on ``Run All Cell``, or go along with <kbd>shift</kbd> + <kbd>enter</kbd> to run them individually.
+Just click on ``Run All Cell``, or go along with [shift] + [enter] to run them individually.
 
 
 Testing
@@ -79,4 +80,15 @@ Then set it up and install the package locally
    source env/bin/activate
    # Install from local
    (env) python3 -m pip install .
+   
+   
+Other Git Processors
+--------------------
+
+Here is a list of other python git processors. (Usually meant for one repository)
+
+- `hercules <https://github.com/src-d/hercules>`_
+- `git-of-theseus <https://github.com/erikbern/git-of-theseus>`_
+
+
 
